@@ -5,12 +5,6 @@
 #include <ctime>    // для time()
 #include <limits>  // для numeric_limits
 
-//Мне просто захотелось разобраться
-#include <string>
-#include <algorithm> // Для transform
-#include <cctype>    // Для tolower
-#include <locale>   // Для locale
-
 using namespace std;
 
 struct Game
@@ -381,10 +375,10 @@ int main()
     {
         cout << "Вы правили 10 долгих лет, фараон. Но слуги считают, что боги оказались неправы, выбрав вас. Народ требует вашей казни!\n";
     }
-    else if (game.sum_percentages_of_dead > 33 && help < 7){
+    else if (game.sum_percentages_of_dead > 10 && help < 9){
         cout << "\tВы правите жестоко, но не глупо, фараон. Народ боится вас, но готов служить дальше! Да направляет вас Ра!\n";
     }
-    else if (game.sum_percentages_of_dead > 33 && help < 7) {
+    else if (game.sum_percentages_of_dead > 3 && help < 10) {
         cout << "\tВы правите как настоящий правитель, фараон. Слуги уважают вас. Они готовы умереть ради вас! Да направляет вас Ра!\n";
     }
     else {
