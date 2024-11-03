@@ -32,34 +32,29 @@ struct Game
     double sum_percentages_of_dead = 0.0f;
 };
 
-static bool yes_or_no()
+void clearConsole() 
 {
-    int ans;
+#ifdef _WIN32
+    system("cls");  // Для Windows
+#else
+    system("clear"); // Для Linux и Mac
+#endif
+}
 
-    while(true) {
-        cin >> ans;
+bool yes_or_no() 
+{
+    bool ans;
+    cout << "Введите 1 (да) или 0 (нет): ";
 
-        // Проверка, был ли ввод успешным
-        if (cin.fail()) {
-            // Если ввод не удался (введено не целое число)
-            cin.clear(); // Сброс флага ошибки
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Игнорируем некорректный ввод
-            cout << "Некорретный ввод.\n";
-        }
-        else if (ans == 1) 
-        {
-            cout << "\n";
-            return true;
-        }
-        else if (ans == 0) 
-        {
-            cout << "\n";
-            return false;
-        }
-        else {
-            cout << "Некорретный ввод.\n";
-        }
+    while (!(cin >> ans)) 
+    {
+        cin.clear(); // Очищаем флаг ошибки
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Очищаем буфер ввода
+
+        cout << "Неправильный ввод. Пожалуйста, введите 1 (да) или 0 (нет): ";
     }
+
+    return ans;
 }
 
 static void saveToFile(const Game& game)
@@ -112,7 +107,7 @@ static Game readFromFile()
         }
         else
         {
-            cout << "Сохранение найдено.\nЖелаете его продолжить (Да - 1/Нет - 0)? ";
+            cout << "Сохранение найдено.\nЖелаете его продолжить?\n";
 
             if (yes_or_no()) {
                 // Возврат указателя на начало
@@ -364,8 +359,7 @@ int main()
 
         saveToFile(game);
 
-        // Очистка консоли
-        system("cls");
+        clearConsole();
     }
 
     game.sum_percentages_of_dead /= 10;
